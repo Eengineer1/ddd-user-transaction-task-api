@@ -1,0 +1,8 @@
+services:
+
+    Leos\Application\UseCase\Security\LoginHandler:
+        public: true
+        autowire: true
+        tags:
+          - { name: tactician.handler, command: Leos\Application\UseCase\Security\Request\Login }
+

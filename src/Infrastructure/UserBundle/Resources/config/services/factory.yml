@@ -1,0 +1,4 @@
+services:
+    Leos\Domain\User\Factory\UserFactoryInterface:
+        class: Leos\Infrastructure\UserBundle\Factory\UserFactory
+        autowire: true

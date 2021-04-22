@@ -1,0 +1,39 @@
+Leos\Domain\Transaction\Model\AbstractTransaction:
+    exclusion_policy: ALL
+    discriminator:
+      field_name: discriminator
+      map:
+        create_task: Leos\Domain\Task\Factory\TaskFactory
+
+    properties:
+        state:
+            expose: true
+            groups: [Basic]
+            inline: true
+            type: Leos\Domain\Task\ValueObject\TaskState
+
+        createdAt:
+            expose: true
+            groups: [Basic]
+
+        updatedAt:
+            expose: true
+            groups: [Basic]
+
+        start:
+            expose: true
+            groups: [Basic]
+
+        end:
+            expose: true
+            groups: [Basic]
+
+        user:
+            expose: true
+            groups: [Identifier, Basic]
+            type: Leos\Domain\User\Model\User
+
+        details:
+            expose: true
+            groups: [Basic]
+

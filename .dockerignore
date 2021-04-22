@@ -1,0 +1,10 @@
+app/config/parameters.yml
+etc/infrastructure/context-*/
+doc/
+report/
+vendor/
+web/bundles/
+var/
+!var/cache/.gitkeep
+!var/logs/.gitkeep
+!var/sessions/.gitkeep

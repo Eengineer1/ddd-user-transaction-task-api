@@ -1,0 +1,13 @@
+{
+    "uuid": "@string@",
+    "real": {
+        "amount": "@integer@",
+        "generated_at": "@string@.isDateTime()"
+    },
+    "bonus": {
+        "amount": "@integer@",
+        "generated_at": "@string@.isDateTime()"
+    },
+    "created_at": "@string@.isDateTime()",
+    "updated_at": null
+}

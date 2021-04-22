@@ -1,0 +1,7 @@
+version: '2'
+services:
+  fpm:
+    image: registry.gitlab.com/jorge07/leos-sf-prod:${RELEASE}
+
+  nginx:
+    image: registry.gitlab.com/jorge07/leos-nginx-prod:${RELEASE}

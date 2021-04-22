@@ -1,0 +1,6 @@
+Leos\Domain\Task\ValueObject\TaskState:
+    exclusion_policy: ALL
+    properties:
+      state:
+          type: string
+          groups: [Basic]

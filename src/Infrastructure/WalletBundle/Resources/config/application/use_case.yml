@@ -1,0 +1,13 @@
+services:
+
+    Leos\Application\UseCase\Wallet\GetWalletHandler:
+        public: true
+        autowire: true
+        tags:
+          - { name: tactician.handler, command: Leos\Application\UseCase\Wallet\Request\GetWallet }
+
+    Leos\Application\UseCase\Wallet\FindWalletHandler:
+        public: true
+        autowire: true
+        tags:
+          - { name: tactician.handler, command: Leos\Application\UseCase\Wallet\Request\Find }

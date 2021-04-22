@@ -1,0 +1,6 @@
+{
+  "uuid": "@string@",
+  "email": "@string@",
+  "created_at": "@string@.isDateTime()",
+  "updated_at": null
+}

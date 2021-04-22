@@ -1,0 +1,31 @@
+jms_serializer:
+  metadata:
+    auto_detection: true
+    directories:
+      Common:
+        namespace_prefix: "Leos\\Domain\\Common"
+        path: "@LeosInfrastructureCommonBundle/Resources/config/serializer/common"
+
+      Wallet:
+        namespace_prefix: "Leos\\Domain\\Wallet"
+        path: "@LeosInfrastructureWalletBundle/Resources/config/serializer/wallet"
+
+      Money:
+        namespace_prefix: "Leos\\Domain\\Money"
+        path: "@LeosInfrastructureMoneyBundle/Resources/config/serializer/money"
+
+      Transaction:
+        namespace_prefix: "Leos\\Domain\\Transaction"
+        path: "@LeosInfrastructureTransactionBundle/Resources/config/serializer/transaction"
+
+      Payment:
+        namespace_prefix: "Leos\\Domain\\Payment"
+        path: "@LeosInfrastructurePaymentBundle/Resources/config/serializer"
+
+      Security:
+        namespace_prefix: "Leos\\Domain\\Security"
+        path: "@LeosInfrastructureSecurityBundle/Resources/config/serializer/auth"
+
+      User:
+        namespace_prefix: "Leos\\Domain\\User"
+        path: "@LeosInfrastructureUserBundle/Resources/config/serializer/user"

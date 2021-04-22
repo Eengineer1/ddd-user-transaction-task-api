@@ -1,0 +1,14 @@
+services:
+
+    leos.use_case.user_command:
+        class: Leos\Application\UseCase\User\RegisterUserHandler
+        autowire: true
+        tags:
+          - { name: tactician.handler, command: Leos\Application\UseCase\User\Request\Register }
+
+    leos.use_case.user_query:
+        class: Leos\Application\UseCase\User\GetUserHandler
+        autowire: true
+        tags:
+          - { name: tactician.handler, command: Leos\Application\UseCase\User\Request\GetUser }
+

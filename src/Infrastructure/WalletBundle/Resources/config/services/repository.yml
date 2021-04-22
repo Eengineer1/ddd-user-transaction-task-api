@@ -1,0 +1,6 @@
+services:
+    Leos\Domain\Wallet\Repository\WalletRepositoryInterface:
+        parent: leos.abstract.repository
+        class: Leos\Infrastructure\WalletBundle\Repository\WalletRepository
+        arguments:
+            - Leos\Domain\Wallet\Model\Wallet

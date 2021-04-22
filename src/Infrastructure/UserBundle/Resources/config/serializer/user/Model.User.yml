@@ -1,0 +1,21 @@
+Leos\Domain\User\Model\User:
+    exclusion_policy: ALL
+    properties:
+        email:
+            expose: true
+            groups: [Basic]
+
+        createdAt:
+            expose: true
+            groups: [Basic]
+
+        updatedAt:
+            expose: true
+            groups: [Basic]
+
+    virtual_properties:
+        uuid:
+            serialized_name: uuid
+            expose: true
+            groups: [Identifier]
+            type: string

@@ -1,0 +1,52 @@
+Leos\Domain\Task\Model\AbstractTask:
+    type: entity
+    table: task
+    inheritanceType: SINGLE_TABLE
+    discriminatorColumn:
+      name: discriminator
+      type: string
+    discriminatorMap:
+      create_task: Leos\Domain\Task\Factory\TaskFactory
+
+    repositoryClass: Leos\Infrastructure\TaskBundle\Repository\TaskRepository
+
+    id:
+      uuid:
+        id: true
+        column: id
+        type: taskId
+        generator:
+          strategy: UUID
+
+    fields:
+      createdAt:
+        type: datetimetz
+
+      updatedAt:
+        type: datetimetz
+        nullable: true
+
+      start:
+        type: datetimetz
+
+      end:
+        type: datetimetz
+
+      details:
+        type: string
+
+    embedded:
+      class: Leos\Domain\Task\ValueObject\TaskState
+
+    manyToOne:
+        user:
+          targetEntity: Leos\Domain\User\Model\User
+          joinColumn:
+            name: user_id
+            referencedColumnName: id
+            nullable: false
+            onDelete: CASCADE
+          cascade:
+            - all
+
+    lifecycleCallbacks: {  }

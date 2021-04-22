@@ -1,0 +1,6 @@
+services:
+    Leos\Domain\Task\Repository\TaskRepositoryInterface:
+        parent: leos.abstract.repository
+        class: Leos\Infrastructure\TaskBundle\Repository\TaskRepository
+        arguments:
+            - Leos\Domain\Task\Model\AbstractTask

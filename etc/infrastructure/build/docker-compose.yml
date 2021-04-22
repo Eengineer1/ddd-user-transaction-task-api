@@ -1,0 +1,43 @@
+version: '2'
+services:
+  mysql:
+    image: mysql:5.7
+    networks:
+      - test
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=ddd
+
+  nginx:
+    build:
+      context: ../../../
+      dockerfile: etc/infrastructure/build/nginx/Dockerfile
+    networks:
+      - test
+    depends_on:
+      - fpm
+  fpm:
+    build:
+      context: ../../../
+      dockerfile: etc/infrastructure/build/fpm/Dockerfile.test
+    networks:
+      - test
+    depends_on:
+      - mysql
+
+  redis:
+    image: redis:3.2-alpine
+
+  rmq:
+    image: rabbitmq:3-management
+    environment:
+      RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
+      RABBITMQ_DEFAULT_USER: "guest"
+      RABBITMQ_DEFAULT_PASS: "guest"
+      RABBITMQ_DEFAULT_VHOST: "/"
+    networks:
+      - test
+
+networks:
+  test:
+    driver: bridge

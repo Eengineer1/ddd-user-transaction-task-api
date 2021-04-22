@@ -1,0 +1,6 @@
+Leos\Domain\Wallet\ValueObject\WalletId:
+    exclusion_policy: ALL
+    properties:
+        uuid:
+            expose: true
+            groups: [Basic]

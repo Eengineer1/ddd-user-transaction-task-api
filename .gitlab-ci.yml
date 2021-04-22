@@ -1,0 +1,65 @@
+stages:
+  - build
+  - test
+  - aceptation
+  - clean
+  - release
+
+before_script:
+  - export RELEASE=${CI_BUILD_REF_NAME}
+  - cd etc/infrastructure
+
+build:
+  stage: build
+  script:
+    - mkdir -p context-${RELEASE}/build
+    - docker pull jorge07/alpine-php:7.1
+    - docker pull jorge07/alpine-php:7.1-dev
+    - docker-compose -p ${RELEASE} -f build/docker-compose.yml pull
+    - docker-compose -p ${RELEASE} -f build/docker-compose.yml build
+    - docker-compose -p ${RELEASE} -f build/docker-compose.yml up -d
+    - docker exec sf-build-${RELEASE} ant build
+
+test-mess-detector:
+  stage: test
+  script:
+    - docker exec ${RELEASE}_fpm_1 ./vendor/bin/phpmd src text cleancode, codesize, controversial, design, naming, unusedcode
+  allow_failure: true
+
+test-deptrac:
+  stage: test
+  script:
+    - docker exec ${RELEASE}_fpm_1 wget http://get.sensiolabs.de/deptrac.phar
+    - docker exec ${RELEASE}_fpm_1 php deptrac.phar analyze --formatter-graphviz=0
+
+test-coverage:
+  stage: test
+  script:
+    - docker exec ${RELEASE}_fpm_1 ant unit-and-functional
+
+aceptation:
+  stage: aceptation
+  script:
+    - docker exec ${RELEASE}_fpm_1 ant acceptation
+
+clean-build:
+  stage: clean
+  script:
+    - docker-compose -p ${RELEASE} -f build/docker-compose.yml down --volumes
+  when: always
+
+release:tags:
+  stage: release
+  only:
+    - tags
+
+  script:
+    - docker build -t sf-build-${RELEASE} -f build/fpm/Dockerfile ../../
+    - docker run -d --name building-${RELEASE} sf-build-${RELEASE}
+    - docker cp building-${RELEASE}:/app context-${RELEASE}/build/
+    - docker rm -f building-${RELEASE}
+    - cp -R prod/fpm context-${RELEASE}/build/fpm
+    - cp -R prod/nginx context-${RELEASE}/build/nginx
+    - docker login -u jorge07 -p ${GITLAB_PASSWORD} registry.gitlab.com
+    - docker-compose -f prod/docker-compose.build.yml build
+    - docker-compose -f prod/docker-compose.build.yml push

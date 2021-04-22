@@ -1,0 +1,8 @@
+services:
+
+    leos.use_case.create_task:
+        class: Leos\Application\UseCase\Task\CreateTaskHandler
+        autowire: true
+        tags:
+          - { name: tactician.handler, command: Leos\Application\UseCase\Task\Request\CreateTask }
+

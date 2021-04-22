@@ -1,0 +1,36 @@
+<?php
+
+namespace Tests\Leos\Application\Request\Wallet;
+
+use Leos\Application\UseCase\Transaction\Request\CreateWallet;
+use PHPUnit\Framework\TestCase;
+use Ramsey\Uuid\Uuid;
+
+
+/**
+ * Class CreateWalletDTOTest
+ *
+ * @package Tests\Leos\Application\DTO\Wallet
+ */
+class CreateWalletDTOTest extends TestCase
+{
+    /**
+     * @group unit
+     */
+    public function testGetters()
+    {
+        $dto = new CreateWallet(Uuid::uuid4(), 'EUR');
+
+        self::assertEquals('EUR', $dto->currency()->code());
+    }
+
+    /**
+     * @group unit
+     *
+     * @expectedException Leos\Domain\Money\Exception\CurrencyWrongCodeException
+     */
+    public function testConstructWrongCurrency()
+    {
+        new CreateWallet(Uuid::uuid4(), 'EURAZO');
+    }
+}

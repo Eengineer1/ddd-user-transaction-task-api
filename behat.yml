@@ -1,0 +1,37 @@
+default:
+    suites:
+        home:
+            paths:
+                - "%paths.base%/tests/UI/Behat/Features/Home"
+            contexts:
+                - Tests\Leos\UI\Behat\Context\Api\Home\HomeContext:
+                    path: http://nginx
+                    basePath: %paths.base%
+                    responsesPath: %paths.base%/tests/UI/Responses/Home
+
+        security:
+            paths:
+                - "%paths.base%/tests/UI/Behat/Features/Security"
+            contexts:
+                - Tests\Leos\UI\Behat\Context\Api\Security\SecurityContext:
+                    path: http://nginx
+                    basePath: %paths.base%
+                    responsesPath: %paths.base%/tests/UI/Responses/Security
+
+        wallet:
+            paths:
+                - "%paths.base%/tests/UI/Behat/Features/Wallet"
+            contexts:
+                - Tests\Leos\UI\Behat\Context\Api\Wallet\WalletContext:
+                    path: http://nginx
+                    basePath: %paths.base%
+                    responsesPath: %paths.base%/tests/UI/Responses/Wallet
+
+        monitor:
+            paths:
+                - "%paths.base%/tests/UI/Behat/Features/Monitor"
+            contexts:
+                - Tests\Leos\UI\Behat\Context\Api\Monitor\MonitorContext:
+                    path: http://nginx
+                    basePath: %paths.base%
+                    responsesPath: %paths.base%/tests/UI/Responses/Monitor

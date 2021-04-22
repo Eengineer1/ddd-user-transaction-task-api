@@ -1,0 +1,31 @@
+imports:
+    - { resource: services/common.yml }
+
+services:
+
+    leos.controller.home:
+      class: Leos\UI\RestBundle\Controller\Home\HomeController
+      parent: leos.abstract.controller
+      arguments:
+        - "@fos_rest.router"
+
+    leos.controller.security:
+      class: Leos\UI\RestBundle\Controller\Security\SecurityController
+      parent: leos.abstract.bus_controller
+
+    leos.controller.monitor:
+      class: Leos\UI\RestBundle\Controller\Monitor\StatusController
+      parent: leos.abstract.controller
+
+    leos.controller.wallet:
+      class: Leos\UI\RestBundle\Controller\Wallet\WalletController
+      parent: leos.abstract.bus_controller
+
+
+    leos.controller.wallet_rollback:
+      class: Leos\UI\RestBundle\Controller\Rollback\RollbackController
+      parent: leos.abstract.bus_controller
+
+    leos.controller.user:
+      class: Leos\UI\RestBundle\Controller\User\UserController
+      parent: leos.abstract.bus_controller

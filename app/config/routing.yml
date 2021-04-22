@@ -1,0 +1,25 @@
+NelmioApiDocBundle:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix:   /api/doc
+
+api:
+    type:   rest
+    prefix: /api/{version}
+    defaults:
+        _format: json
+        version: v1
+
+    requirements:
+        _format: "json"
+        version: "(%api_supported_versions%)"
+    resource: "@LeosUIRestBundle/Resources/config/routing.yml"
+
+public:
+    type:   rest
+    prefix: /
+    defaults:
+        _format: json
+    requirements:
+        _format: "json"
+
+    resource: "@LeosUIRestBundle/Resources/config/routing_public.yml"
